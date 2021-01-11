@@ -19,7 +19,7 @@
                         date("Ymd",strtotime("2 day"))=>'明後日以降',];
                     ?>
                     {!! Form::label('deadline', '締切:') !!}
-                    {!! Form::select('deadline', $deadline, '', ['placeholder'=>'締切日を入れてください(必須)','class' => 'form-control']) !!}
+                    {!! Form::select('deadline', $deadline, null, ['placeholder'=>'締切日を入れてください(必須)','class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
                     <?php
@@ -37,7 +37,7 @@
                         '100'=>'100',];
                     ?>
                     {!! Form::label('progress', '進捗率(%):') !!}
-                    {!! Form::select('progress',$percent , '', ['placeholder'=>'進捗率を選択してください(必須)','class' => 'form-control']) !!}
+                    {!! Form::select('progress',$percent , null, ['placeholder'=>'進捗率を選択してください(必須)','class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
                     <?php
@@ -49,8 +49,12 @@
                     {!! Form::label('priority', '優先度:') !!}
                     {!! Form::select('priority', $hml, null, ['placeholder'=>'優先度を選択してください(必須)','class' => 'form-control']) !!}
                 </div>
-                    {!! Form::submit('タスクを始める', ['class' => 'btn btn-primary']) !!}
-
+                <div class="form-group">
+                    {!! Form::label('status', 'ステータス:') !!}
+                    {!! Form::text('status', null, ['placeholder'=>'完了/未完了(必須)','class' => 'form-control']) !!}
+                </div>
+                {!! Form::submit('登録する', ['class' => 'btn btn-primary']) !!}
+                
             {!! Form::close() !!}
             </div>
     </div>

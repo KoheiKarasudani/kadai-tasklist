@@ -23,6 +23,10 @@
             <th>優先度</th>
             <td>{{$task->priority}}</td>
         </tr>
+        <tr>
+            <th>ステータス</th>
+            <td>{{$task->status}}</td>
+        </tr>
         
         
     </table>

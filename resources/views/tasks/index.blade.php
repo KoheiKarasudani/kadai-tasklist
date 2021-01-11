@@ -15,6 +15,7 @@
                 <th>締切</th>
                 <th>進捗率(%)</th>
                 <th>優先度</th>
+                <th>ステータス</th>
                 <th>    </th>
             </tr>
         </thead>
@@ -31,6 +32,7 @@
                 <td>{{$task->deadline}}</td>
                 <td>{{$task->progress}}</td>
                 <td>{{$task->priority}}</td>
+                <td>{{$task->status}}</td>
                 @if(strtotime($task->deadline) == strtotime(date('Ymd')))
                 <td><i class="fas fa-hourglass-end"></i></td>
                 @elseif(strtotime($task->deadline) == strtotime(date('Ymd',strtotime("+1 day"))))

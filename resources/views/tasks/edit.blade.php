@@ -49,7 +49,11 @@
                     {!! Form::label('priority', '優先度:') !!}
                     {!! Form::select('priority', $hml, $task->priority, ['class' => 'form-control']) !!}
                 </div>
-                    {!! Form::submit('更新する！', ['class' => 'btn btn-primary']) !!}
+                <div class="form-group">
+                    {!! Form::label('status', 'ステータス:') !!}
+                    {!! Form::text('status', $task->status, ['class' => 'form-control']) !!}
+                </div>
+                    {!! Form::submit('更新する', ['class' => 'btn btn-primary']) !!}
 
             {!! Form::close() !!}
             </div>
