@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    
+@if(Auth::check()){{-- 認証済み --}}
     <?php $today = date('Y/m/d'); ?>
     <h1>本日({{$today}})のタスク一覧</h1>
 
@@ -20,7 +20,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($tasks as $task)
+            @foreach($tasks ?? '' as $task)
             <tr>
                 <td>{!! link_to_route('tasks.show',$task->id,['task' =>$task->id]) !!}</td>
                 @if(strtotime($task->deadline) == strtotime(date('Ymd')))
@@ -45,7 +45,16 @@
         </tbody>
     </table>
     @endif
-    {{ $tasks->links() }}
-    {!! link_to_route('tasks.create','新規タスクの登録',[],['class' => 'btn btn-primary']) !!}
-    
+    {{ $tasks ?? ''->links() }}
+    {!! link_to_route('tasks.create','Create New Task',[],['class' => 'btn btn-primary']) !!}
+@else{{-- 認証なし --}}
+    <div class="center jumbotron">
+        <div class="text-center">
+            <h1>Welcome to the Tasklists</h1>
+            {{-- ユーザ登録ページへのリンク --}}
+            {!! link_to_route('signup.get', 'Sign up now!', [], ['class' => 'btn btn-lg btn-primary']) !!}
+        </div>
+        </div>
+    </div>
+@endif
 @endsection
