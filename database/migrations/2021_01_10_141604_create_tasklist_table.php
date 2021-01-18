@@ -20,6 +20,10 @@ class CreateTasklistTable extends Migration
             $table->integer('progress');
             $table->string('priority');
             $table->timestamps();
+            $table->string('status', 10);
+            $table->unsignedBigInteger('user_id');
+            // 外部キー制約
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
