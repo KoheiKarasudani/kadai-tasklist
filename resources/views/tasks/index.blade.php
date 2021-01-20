@@ -20,7 +20,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($tasks ?? '' as $task)
+            @foreach($tasks as $task)
             <tr>
                 <td>{!! link_to_route('tasks.show',$task->id,['task' =>$task->id]) !!}</td>
                 @if(strtotime($task->deadline) == strtotime(date('Ymd')))
@@ -45,7 +45,7 @@
         </tbody>
     </table>
     @endif
-    {{ $tasks ?? ''->links() }}
+    {{ $tasks ->links() }}
     {!! link_to_route('tasks.create','Create New Task',[],['class' => 'btn btn-primary']) !!}
 @else{{-- 認証なし --}}
     <div class="center jumbotron">
@@ -53,7 +53,6 @@
             <h1>Welcome to the Tasklists</h1>
             {{-- ユーザ登録ページへのリンク --}}
             {!! link_to_route('signup.get', 'Sign up now!', [], ['class' => 'btn btn-lg btn-primary']) !!}
-        </div>
         </div>
     </div>
 @endif

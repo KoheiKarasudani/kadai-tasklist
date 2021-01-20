@@ -15,17 +15,19 @@ class TasksController extends Controller
      */
     public function index()
     {
-        $tasks = '';
+        
         if (\Auth::check()) { // 認証済みの場合
             // 認証済みユーザを取得
             $user = \Auth::user();
             // ユーザの投稿の一覧を作成日時の降順で取得
             $tasks = $user->tasks()->orderBy('created_at', 'desc')->paginate(10);
-        }
         
-        return view('tasks.index', [
+            return view('tasks.index', [
             'tasks' => $tasks,
             ]);
+        }else{
+            return view('tasks.index');
+        }
     }
 
     /**
@@ -90,6 +92,8 @@ class TasksController extends Controller
         return view('tasks.show',[
             'task'=>$task,
             ]);
+        }else{
+            return redirect('/');
         }
     }
 
@@ -107,6 +111,8 @@ class TasksController extends Controller
         return view('tasks.edit', [
             'task'=>$task,
             ]);
+        }else{
+            return redirect('/');
         }
     }
 
@@ -130,17 +136,17 @@ class TasksController extends Controller
         
         $task = Task::findOrFail($id);
         
+        if (\Auth::id() === $task->user_id) {
         $task->content = $request->content;
         $task->deadline = $request->deadline;
         $task->progress = $request->progress;
         $task->priority = $request->priority;
         $task->status = $request->status;
-        
-        if (\Auth::id() === $task->user_id) {
         $task->save();
-        }
-        
         return redirect('/');
+        }else{
+            return redirect('/');
+        }
         
     }
 
